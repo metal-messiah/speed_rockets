@@ -16,7 +16,7 @@ let shownStage = false;
 
 preload = () => {
 	earth = new Image(600, 125);
-	earth.src = 'earth.png';
+	earth.src = './assets/earth.png';
 };
 
 setup = () => {
