@@ -5,15 +5,11 @@ mousePressed = (evt) => {
 		if (game.isGameOver()) {
 			if (mouseIntersectsTryAgain()) {
 				reset();
-				// let c = confirm('Do you really want to restart?');
-				// if (c) window.location.reload();
 			}
 		} else {
 			if (evt.button === 2) {
 				if (game.player.inventory.mines) {
-					// console.log(game.player.inventory.mines);
 					game.addMine(mouseX, mouseY);
-					game.player.inventory.mines--;
 				}
 			} else {
 				game.mouseExplode();
@@ -29,7 +25,9 @@ mousePressed = (evt) => {
 keyPressed = (evt) => {
 	const { key } = evt;
 	if (key === ' ') {
-		game.bombs.push(new Bomb());
+		if (game.player.inventory.bombs) {
+			game.addBomb();
+		}
 	}
 };
 

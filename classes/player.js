@@ -1,10 +1,11 @@
 class Player {
 	constructor() {
-		this.inventory = { mines: 0 };
+		this.inventory = { mines: 0, bombs: 0 };
 		this.hits = 0;
 		this.score = 0;
 
 		this.mineScore = 0;
+		this.bombScore = 0;
 
 		this.highscoreKey = 'rockets_highscore';
 		this.highscore = Number(localStorage.getItem(this.highscoreKey));
@@ -16,6 +17,8 @@ class Player {
 	updateScore(value) {
 		this.score += value;
 		this.mineScore += value;
+		this.bombScore += value;
+
 		this.updateInventory();
 	}
 
@@ -28,6 +31,12 @@ class Player {
 			this.inventory.mines++;
 			this.mineScore -= game.mineLimit;
 			game.addMessage('Gravity Mine');
+		}
+
+		if (this.bombScore / game.bombLimit > 1) {
+			this.inventory.bombs++;
+			this.bombScore -= game.bombLimit;
+			game.addMessage('Nuke');
 		}
 	}
 }

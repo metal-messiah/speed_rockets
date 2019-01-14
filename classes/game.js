@@ -17,6 +17,7 @@ class Game {
 		this.total = 0;
 
 		this.mineLimit = 5000;
+		this.bombLimit = this.mineLimit * 2;
 
 		this.player = new Player();
 
@@ -67,6 +68,12 @@ class Game {
 
 	addMine(x, y) {
 		this.mines.push(new GravityMine(x, y));
+		this.player.inventory.mines--;
+	}
+
+	addBomb() {
+		this.bombs.push(new Bomb());
+		this.player.inventory.bombs--;
 	}
 
 	addMessage(message) {
@@ -91,10 +98,12 @@ class Game {
 			followRocket = null;
 		}
 
-		this.messages.forEach((message) => {
-			message.draw();
-			if (!message.shouldDestroy() && !message.destroyed) {
-				message.grow();
+		this.messages.forEach((message, i) => {
+			if (i === 0) {
+				message.draw();
+				if (!message.shouldDestroy() && !message.destroyed) {
+					message.grow();
+				}
 			}
 		});
 

@@ -1,13 +1,21 @@
 body {
-	padding: 0;
+	padding: 25px;
 	margin: 0;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-evenly;
+	flex-wrap: wrap-reverse;
 
 	background: #aaabbb;
 }
 
 canvas {
 	margin: 0 auto;
+	min-width: 600px;
+}
+
+.help {
+	width: 100%;
+	padding: 0 50px;
+	text-align: center;
 }

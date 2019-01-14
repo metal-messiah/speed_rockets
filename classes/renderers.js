@@ -33,18 +33,6 @@ const rocketRenderer = (x, y, rocketWidth, rocketHeight, accentColor) => {
 };
 
 const tailRenderer = (x, y, rocketWidth, rocketHeight) => {
-	// const { x, y } = this.pos;
-	// smoke
-
-	// for (let i = 1; i <= 50; i++) {
-	// 	push();
-	// 	const c = color(random([ 'white', 'yellow' ]));
-	// 	fill(c);
-	// 	noStroke();
-	// 	ellipse(x + random(0, this.radius / 2), y + i * 6, 1);
-	// 	pop();
-	// }
-
 	push();
 	const originY = y + rocketHeight;
 	fill(color(random([ 'red', 'orange', 'yellow' ])));
@@ -57,5 +45,138 @@ const tailRenderer = (x, y, rocketWidth, rocketHeight) => {
 	vertex(x + rocketWidth + rocketWidth * 1.1, originY + rocketHeight / 4 + random(-1, 5));
 	vertex(x + rocketWidth, originY);
 	endShape(CLOSE);
+	pop();
+};
+
+const showInventory = () => {
+	let { inventory } = game.player;
+
+	push();
+	stroke(0);
+	strokeWeight(2);
+
+	fill(255);
+	textFont(font);
+
+	textAlign(LEFT);
+
+	textSize(20);
+	text(`Inventory`, 10, 25);
+
+	textSize(16);
+	text(`🌌 ${inventory.mines.toLocaleString()}`, 10, 50);
+
+	text(`💣 ${inventory.bombs.toLocaleString()}`, 10, 75);
+
+	pop();
+};
+
+const showScore = () => {
+	let { score, highscore } = game.player;
+	let { total, hits, limit } = game;
+	const misses = total - hits;
+
+	push();
+	stroke(0);
+	strokeWeight(2);
+
+	fill(255);
+
+	textFont(font);
+	textSize(20);
+
+	textAlign(RIGHT);
+
+	text(`Stage ${limit}`, width - 10, 25);
+
+	textSize(16);
+	text(`${hits} 💥`, width - 10, 50);
+
+	fill(color('orange'));
+	text(`${misses} ❌`, width - 10, 75);
+
+	fill(255);
+	text(`${score.toLocaleString()} ✴️`, width - 10, 100);
+
+	text(`${highscore.toLocaleString()} 🏆`, width - 10, 125);
+
+	pop();
+};
+
+const showStageScreen = () => {
+	let { limit } = game;
+	push();
+	background('orange');
+
+	fill(0);
+
+	textFont(font);
+	textSize(40);
+	textAlign(CENTER, CENTER);
+	text(`Stage ${limit}`, width / 2, height / 2);
+	pop();
+
+	noLoop();
+
+	setTimeout(() => {
+		shownStage = true;
+		loop();
+	}, 5000);
+};
+
+const showGameOver = () => {
+	let newHighScore = false;
+	if (game.player.highscore < game.player.score) {
+		game.player.highscore = game.player.score;
+		localStorage.setItem(game.player.highscoreKey, game.player.highscore);
+		newHighScore = true;
+	}
+
+	push();
+	background('red');
+
+	fill(0);
+
+	textFont(font);
+	textSize(40);
+	textAlign(CENTER, CENTER);
+	text(
+		`Game Over!
+	Score: ${game.player.score.toLocaleString()}
+	Highscore: ${game.player.highscore.toLocaleString()}
+	${newHighScore ? `New High Score!` : ''}`,
+		width / 2,
+		height / 2
+	);
+
+	fill(0);
+	rect(width / 2 - 100, height - 100, 200, 100);
+
+	fill(color('orange'));
+	textSize(24);
+	text('Click To Try Again', width / 2, height - 50);
+	pop();
+	noLoop();
+};
+
+const showStartScreen = () => {
+	push();
+	background(0);
+
+	textFont(font);
+	textAlign(CENTER);
+
+	fill(color('orange'));
+	textSize(40);
+	text('Speed Rockets', width / 2, height / 2);
+
+	fill(color('orange'));
+	rect(width / 2 - 100, height - 100, 200, 85);
+
+	fill(0);
+	textSize(24);
+	text('New Game', width / 2, height - 50);
+
+	rocketSeeksMouse();
 	pop();
 };
