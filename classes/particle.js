@@ -1,4 +1,4 @@
-class Particle extends Firework {
+class Particle extends Rocket {
 	constructor(x, y, radius, inheritedColor) {
 		super(x, y, 5);
 		this.inheritedColor = inheritedColor;

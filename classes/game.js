@@ -1,6 +1,6 @@
 class Game {
 	constructor() {
-		this.fireworks = [];
+		this.rockets = [];
 		this.mines = [];
 		this.stars = [];
 		this.scoreTips = [];
@@ -38,16 +38,16 @@ class Game {
 	}
 
 	mouseExplode() {
-		this.fireworks.forEach((firework) => {
-			if (firework.intersectsMouse()) {
-				this.explode(firework);
+		this.rockets.forEach((rocket) => {
+			if (rocket.intersectsMouse()) {
+				this.explode(rocket);
 			}
 		});
 	}
 
-	explode(firework) {
-		if (!firework.exploded) {
-			firework.explode();
+	explode(rocket) {
+		if (!rocket.exploded) {
+			rocket.explode();
 			this.hits += 1;
 		}
 	}
@@ -72,15 +72,15 @@ class Game {
 		this.messages.push(new Message(width / 2, height / 2, message, 24));
 	}
 
-	generateFirework(mouseClicked) {
-		// console.log(this.fireworks);
-		if (this.fireworks.length < this.limit || mouseClicked) {
+	generaterocket(mouseClicked) {
+		// console.log(this.rockets);
+		if (this.rockets.length < this.limit || mouseClicked) {
 			const x = mouseClicked ? mouseX : random(width * 0.2, width - width * 0.2);
 			const y = height;
 
-			const firework = new Firework(x, y, 15 / this.limit + 15);
+			const rocket = new Rocket(x, y, 15 / this.limit + 15);
 
-			this.fireworks.push(firework);
+			this.rockets.push(rocket);
 		}
 		return;
 	}
@@ -118,25 +118,25 @@ class Game {
 		if (this.total % 10 === 0 && this.total && !this.increased) {
 			this.increaseLimit();
 		} else {
-			// if (!this.fireworks.length) setTimeout(() => this.generateFirework(), random(0, 5000));
+			// if (!this.rockets.length) setTimeout(() => this.generaterocket(), random(0, 5000));
 
-			this.generateFirework();
+			this.generaterocket();
 
-			this.fireworks.forEach((firework) => {
+			this.rockets.forEach((rocket) => {
 				this.mines.forEach((mine) => {
-					const fwDistToMine = dist(firework.pos.x, firework.pos.y, mine.pos.x, mine.pos.y);
+					const fwDistToMine = dist(rocket.pos.x, rocket.pos.y, mine.pos.x, mine.pos.y);
 					if (fwDistToMine < mine.waveRadius) {
 						const target = createVector(mine.pos.x, mine.pos.y);
-						const seek = firework.seek(target);
-						firework.applyForce(seek);
-						firework.update();
+						const seek = rocket.seek(target);
+						rocket.applyForce(seek);
+						rocket.update();
 
-						if (firework.intersectsTarget(mine)) {
-							if (!firework.exploded) {
+						if (rocket.intersectsTarget(mine)) {
+							if (!rocket.exploded) {
 								mine.decreaseHealth();
 								// console.log('decrease');
 							}
-							this.explode(firework);
+							this.explode(rocket);
 						}
 					}
 
@@ -156,13 +156,13 @@ class Game {
 				});
 
 				const force = createVector(0, random(0, -0.05));
-				firework.applyForce(force);
-				firework.update();
+				rocket.applyForce(force);
+				rocket.update();
 
-				if (!firework.exploded) {
-					firework.draw();
+				if (!rocket.exploded) {
+					rocket.draw();
 				} else {
-					firework.particles.forEach((particle) => {
+					rocket.particles.forEach((particle) => {
 						particle.applyForce(gravity);
 						particle.update();
 						particle.draw();

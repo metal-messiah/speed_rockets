@@ -1,4 +1,4 @@
-class Firework extends Moveable {
+class Rocket extends Moveable {
 	constructor(x, y, radius) {
 		super(x, y);
 		draw = draw || true;
@@ -53,7 +53,7 @@ class Firework extends Moveable {
 	update() {
 		if (this.exploded && this.isFinished()) {
 			// console.log('finished');
-			game.removeById('fireworks', this.id);
+			game.removeById('rockets', this.id);
 		} else if (this.hitEarth()) {
 			// console.log('explode');
 			this.explode();
