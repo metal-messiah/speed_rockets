@@ -101,7 +101,7 @@ class Rocket extends Moveable {
 			const scoreTip = new ScoreTip(mouseX, mouseY, this.score, 'score');
 			game.addScoreTip(scoreTip);
 		} else {
-			missedRed = true;
+			game.decreasePopulation();
 		}
 
 		this.exploded = true;

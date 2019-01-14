@@ -12,6 +12,7 @@ body {
 canvas {
 	margin: 0 auto;
 	min-width: 600px;
+	border-radius: 10px;
 }
 
 .help {

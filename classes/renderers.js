@@ -48,6 +48,37 @@ const tailRenderer = (x, y, rocketWidth, rocketHeight) => {
 	pop();
 };
 
+const galaxyRenderer = () => {
+	galaxyShapes.forEach((s) => {
+		push();
+
+		fill(s.c);
+		noStroke();
+		ellipse(s.x, s.y, s.rx, s.ry);
+		pop();
+	});
+};
+
+const showEarthStats = () => {
+	let { population } = game;
+
+	push();
+	stroke(color('white'));
+	strokeWeight(2);
+	noStroke();
+	fill(color(bg));
+	textFont(font);
+	textAlign(CENTER, CENTER);
+
+	textSize(24);
+
+	const truncatedPop = (population / 1000).toString(); // millions
+	const firstChar = population > 1000000000 ? truncatedPop[0] : '0';
+	const popString = `${firstChar}.${truncatedPop.substring(1, truncatedPop.length - 3)} Billion`;
+	text(`🚶 ${popString}`, width / 2, 25);
+	pop();
+};
+
 const showInventory = () => {
 	let { inventory } = game.player;
 
@@ -64,9 +95,8 @@ const showInventory = () => {
 	text(`Inventory`, 10, 25);
 
 	textSize(16);
-	text(`🌌 ${inventory.mines.toLocaleString()}`, 10, 50);
-
-	text(`💣 ${inventory.bombs.toLocaleString()}`, 10, 75);
+	text(`💣 ${inventory.bombs.toLocaleString()}`, 10, 50);
+	text(`🌌 ${inventory.mines.toLocaleString()}`, 10, 75);
 
 	pop();
 };
@@ -163,6 +193,8 @@ const showStartScreen = () => {
 	push();
 	background(0);
 
+	rocketSeeksMouse();
+
 	textFont(font);
 	textAlign(CENTER);
 
@@ -177,6 +209,5 @@ const showStartScreen = () => {
 	textSize(24);
 	text('New Game', width / 2, height - 50);
 
-	rocketSeeksMouse();
 	pop();
 };

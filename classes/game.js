@@ -12,6 +12,8 @@ class Game {
 
 		this.limit = 1;
 
+		this.population = 7530000000;
+
 		this.missLimit = 5;
 		this.hits = 0;
 		this.total = 0;
@@ -30,8 +32,27 @@ class Game {
 		}
 	}
 
+	getMisses() {
+		return this.total - this.hits;
+	}
+
 	isGameOver() {
-		return this.total - this.hits >= this.missLimit;
+		// return this.getMisses() >= this.missLimit;
+		return this.population <= 0;
+	}
+
+	decreasePopulation() {
+		// kill 1billion people for each rocket
+		this.population -= 1000000000;
+		bg = 'red';
+		setTimeout(() => {
+			bg = 'black';
+		}, 250);
+	}
+
+	increasePopulation() {
+		// earth's daily net population increase
+		this.population += 225000;
 	}
 
 	increaseLimit() {
@@ -94,6 +115,8 @@ class Game {
 	}
 
 	render() {
+		this.increasePopulation();
+
 		if (followRocket) {
 			followRocket = null;
 		}

@@ -14,6 +14,10 @@ let font = 'Staatliches';
 
 let shownStage = false;
 
+let galaxyShapes = [];
+
+let bg = 'black';
+
 preload = () => {
 	earth = new Image(600, 125);
 	earth.src = './assets/earth.png';
@@ -27,6 +31,18 @@ setup = () => {
 	game.generateStars();
 
 	followRocket = new FollowRocket();
+
+	// for (let i = 0; i < 200; i++) {
+	// 	let c = getRandomColor();
+	// 	c.setAlpha(4);
+	// 	galaxyShapes.push({
+	// 		x: random(0, width),
+	// 		y: random(0, height),
+	// 		rx: random(50, 200),
+	// 		ry: random(50, 200),
+	// 		c: c
+	// 	});
+	// }
 };
 
 reset = () => {
@@ -43,15 +59,18 @@ draw = () => {
 	if (game) {
 		if (game.started) {
 			if (!game.isGameOver()) {
-				background('#000');
+				background(color(bg));
+
+				galaxyRenderer();
 
 				game.render();
+
+				showEarthStats();
+				showScore();
+				showInventory();
 			} else {
 				showGameOver();
 			}
-
-			showScore();
-			showInventory();
 		} else {
 			showStartScreen();
 		}
