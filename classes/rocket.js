@@ -14,7 +14,7 @@ class Rocket extends Moveable {
 
 		this.pos = createVector(x, y);
 		this.acc = createVector();
-		this.vel = createVector();
+		this.vel = createVector(0, -0.1);
 
 		this.accentColor = getRandomColor();
 
@@ -45,9 +45,22 @@ class Rocket extends Moveable {
 
 		this.score = round(this.score * 0.995);
 
-		rocketRenderer(x, y, this.rocketWidth, this.rocketHeight, this.accentColor);
+		const theta = this.rotation();
 
-		tailRenderer(x, y, this.rocketWidth, this.rocketHeight);
+		push();
+		translate(this.pos.x, this.pos.y);
+		rotate(theta);
+		rocketRenderer(0, 0, this.rocketWidth, this.rocketHeight, this.accentColor);
+
+		tailRenderer(0, 0, this.rocketWidth, this.rocketHeight);
+		pop();
+
+		// push();
+		// rotate(rotation);
+		// rocketRenderer(x, y, this.rocketWidth, this.rocketHeight, this.accentColor);
+
+		// tailRenderer(x, y, this.rocketWidth, this.rocketHeight);
+		// pop();
 	}
 
 	update() {
