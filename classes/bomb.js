@@ -9,6 +9,9 @@ class Bomb extends Moveable {
 		this.color.setAlpha(150);
 
 		this.history = [];
+
+		const bombSound = document.getElementById('bomb');
+		bombSound.play();
 	}
 
 	shouldDestroy() {
