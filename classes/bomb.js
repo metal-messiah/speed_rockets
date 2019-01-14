@@ -15,9 +15,6 @@ class Bomb extends Moveable {
 	}
 
 	shouldDestroy() {
-		if (this.radius > width * 2) {
-			console.log(this.history);
-		}
 		return this.radius > width * 2;
 	}
 
