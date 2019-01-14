@@ -15,6 +15,8 @@ class Game {
 		this.hits = 0;
 		this.total = 0;
 
+		this.mineLimit = 5000;
+
 		this.player = new Player();
 
 		this.messages = [];

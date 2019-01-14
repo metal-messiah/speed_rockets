@@ -5,7 +5,6 @@ class Player {
 		this.score = 0;
 
 		this.mineScore = 0;
-		this.mineLimit = 10000;
 
 		this.highscoreKey = 'rockets_highscore';
 		this.highscore = Number(localStorage.getItem(this.highscoreKey));
@@ -25,9 +24,9 @@ class Player {
 	}
 
 	updateInventory() {
-		if (this.mineScore / this.mineLimit > 1) {
+		if (this.mineScore / game.mineLimit > 1) {
 			this.inventory.mines++;
-			this.mineScore -= this.mineLimit;
+			this.mineScore -= game.mineLimit;
 			game.addMessage('Gravity Mine');
 		}
 	}
