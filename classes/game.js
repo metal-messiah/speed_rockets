@@ -5,6 +5,7 @@ class Game {
 		this.stars = [];
 		this.scoreTips = [];
 		this.missTips = [];
+		this.bombs = [];
 
 		this.started = false;
 		this.increased = false;
@@ -139,20 +140,15 @@ class Game {
 							this.explode(rocket);
 						}
 					}
-
 					mine.draw();
+				});
 
-					// mine.waves.forEach((wave) => {
-					// 	if (wave.shouldReset(mine)) {
-					// 		mine.waves = [];
-					// 	} else {
-					// 		// const target = createVector(mine.pos.x, mine.pos.y);
-					// 		// const seek = wave.seek(target);
-					// 		// wave.applyForce(seek);
-					// 		// wave.update();
-					// 		wave.draw();
-					// 	}
-					// });
+				this.bombs.forEach((bomb) => {
+					bomb.draw();
+
+					if (rocket.intersectsTarget(bomb)) {
+						this.explode(rocket);
+					}
 				});
 
 				const force = createVector(0, random(0, -0.05));
