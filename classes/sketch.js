@@ -18,6 +18,8 @@ let galaxyShapes = [];
 
 let bg = 'black';
 
+fr = 0;
+
 preload = () => {
 	earth = new Image(600, 125);
 	earth.src = './assets/earth.png';
@@ -56,6 +58,8 @@ draw = () => {
 				showEarthStats();
 				showScore();
 				showInventory();
+
+				showSpecs();
 			} else {
 				showGameOver();
 			}

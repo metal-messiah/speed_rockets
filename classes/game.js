@@ -18,7 +18,7 @@ class Game {
 		this.hits = 0;
 		this.total = 0;
 
-		this.mineLimit = 5000;
+		this.mineLimit = 10000;
 		this.bombLimit = this.mineLimit * 2;
 
 		this.player = new Player();
@@ -80,7 +80,11 @@ class Game {
 	}
 
 	removeById(property, id) {
-		this[property] = this[property].filter((item) => item.id != id);
+		const idx = this[property].findIndex((item) => item.id === id);
+		delete this[property][idx];
+		this[property] = this[property].filter((item) => item);
+
+		// this[property] = this[property].filter((item) => item.id != id);
 	}
 
 	addScoreTip(scoreTip) {

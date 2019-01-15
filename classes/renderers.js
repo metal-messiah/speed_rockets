@@ -59,6 +59,21 @@ const galaxyRenderer = () => {
 	});
 };
 
+const showSpecs = () => {
+	if (frameCount % 60 === 0) {
+		fr = round(frameRate());
+	}
+	push();
+	noStroke();
+	fill(color('white'));
+	textFont(font);
+	textAlign(CENTER, CENTER);
+
+	textSize(24);
+	text(fr, 25, height - 25);
+	pop();
+};
+
 const showEarthStats = () => {
 	let { population } = game;
 
