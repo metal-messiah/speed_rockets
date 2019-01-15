@@ -158,7 +158,11 @@ const showGameOver = () => {
 	let newHighScore = false;
 	if (game.player.highscore < game.player.score) {
 		game.player.highscore = game.player.score;
-		localStorage.setItem(game.player.highscoreKey, game.player.highscore);
+		try {
+			localStorage.setItem(game.player.highscoreKey, game.player.highscore);
+		} catch (err) {
+			// do nothing
+		}
 		newHighScore = true;
 	}
 

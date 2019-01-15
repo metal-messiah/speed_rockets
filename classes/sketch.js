@@ -31,18 +31,6 @@ setup = () => {
 	game.generateStars();
 
 	followRocket = new FollowRocket();
-
-	// for (let i = 0; i < 200; i++) {
-	// 	let c = getRandomColor();
-	// 	c.setAlpha(4);
-	// 	galaxyShapes.push({
-	// 		x: random(0, width),
-	// 		y: random(0, height),
-	// 		rx: random(50, 200),
-	// 		ry: random(50, 200),
-	// 		c: c
-	// 	});
-	// }
 };
 
 reset = () => {

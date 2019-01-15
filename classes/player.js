@@ -8,9 +8,14 @@ class Player {
 		this.bombScore = 0;
 
 		this.highscoreKey = 'rockets_highscore';
-		this.highscore = Number(localStorage.getItem(this.highscoreKey));
-		if (!this.highscore) {
-			localStorage.setItem(this.highscoreKey, 0);
+		try {
+			this.highscore = Number(localStorage.getItem(this.highscoreKey));
+			if (!this.highscore) {
+				localStorage.setItem(this.highscoreKey, 0);
+			}
+		} catch (err) {
+			this.highscore = 0;
+			console.log('couldnt get highscore, localstorage failed');
 		}
 	}
 
