@@ -97,9 +97,6 @@ class Rocket extends Moveable {
 	explode() {
 		if (!this.hitEarth()) {
 			game.player.updateScore(this.score);
-
-			const scoreTip = new ScoreTip(mouseX, mouseY, this.score, 'score');
-			game.addScoreTip(scoreTip);
 		} else {
 			game.decreasePopulation();
 		}
@@ -114,7 +111,7 @@ class Rocket extends Moveable {
 
 		const { x, y } = this.pos;
 		while (this.particles.length < 100) {
-			const particle = new Particle(x, y, this.radius, this.accentColor);
+			const particle = new Particle(x, y, 5, this.accentColor);
 			const force = createVector(random(-1, 1), random(-1, 0.25));
 			force.setMag(random(1, 6));
 			particle.applyForce(force);

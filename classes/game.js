@@ -6,6 +6,7 @@ class Game {
 		this.scoreTips = [];
 		this.missTips = [];
 		this.bombs = [];
+		this.asteroids = [];
 
 		this.started = false;
 		this.increased = false;
@@ -68,6 +69,13 @@ class Game {
 				this.explode(rocket);
 			}
 		});
+
+		this.asteroids.forEach((asteroid) => {
+			if (asteroid.intersectsMouse()) {
+				// this.explode(rocket);
+				asteroid.hit();
+			}
+		});
 	}
 
 	explode(rocket) {
@@ -121,6 +129,18 @@ class Game {
 		return;
 	}
 
+	generateAsteroid() {
+		if (this.asteroids.length < 1) {
+			const x = random(width * 0.2, width - width * 0.2);
+			const y = height;
+
+			const asteroid = new Asteroid(x, y, random(10, 12));
+
+			this.asteroids.push(asteroid);
+		}
+		return;
+	}
+
 	render() {
 		this.rocketCooldown = this.rocketCooldown ? this.rocketCooldown - 1 : 0;
 
@@ -161,6 +181,51 @@ class Game {
 			this.increaseLimit();
 		} else {
 			// if (!this.rockets.length) setTimeout(() => this.generaterocket(), random(0, 5000));
+
+			this.generateAsteroid();
+
+			this.asteroids.forEach((asteroid) => {
+				this.mines.forEach((mine) => {
+					const fwDistToMine = dist(asteroid.pos.x, asteroid.pos.y, mine.pos.x, mine.pos.y);
+					if (fwDistToMine < mine.waveRadius) {
+						const target = createVector(mine.pos.x, mine.pos.y);
+						const seek = asteroid.seek(target);
+						asteroid.applyForce(seek);
+						asteroid.update();
+
+						if (asteroid.intersectsTarget(mine)) {
+							mine.decreaseHealth();
+							let times = asteroid.health;
+							for (let i = 1; i <= times; i++) {
+								asteroid.hit();
+							}
+						}
+					}
+					mine.draw();
+				});
+
+				this.bombs.forEach((bomb) => {
+					bomb.draw();
+
+					if (asteroid.intersectsTarget(bomb)) {
+						let times = asteroid.health;
+						for (let i = 1; i <= times; i++) {
+							asteroid.hit();
+						}
+					}
+				});
+
+				const force = createVector(0, random(0, -0.01));
+				asteroid.applyForce(force);
+				asteroid.update();
+				asteroid.draw();
+
+				asteroid.particles.forEach((particle) => {
+					particle.applyForce(gravity);
+					particle.update();
+					particle.draw();
+				});
+			});
 
 			this.generaterocket();
 

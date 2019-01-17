@@ -27,6 +27,9 @@ class Player {
 		this.bombScore += value;
 
 		this.updateInventory();
+
+		const scoreTip = new ScoreTip(mouseX, mouseY, value, 'score');
+		game.addScoreTip(scoreTip);
 	}
 
 	getScore() {

@@ -60,4 +60,14 @@ class Moveable {
 			return false;
 		}
 	}
+
+	intersectsMouse() {
+		let xMin, xMax, yMin, yMax;
+		xMin = this.pos.x - this.radius;
+		xMax = this.pos.x + this.radius;
+		yMin = this.pos.y - this.radius;
+		yMax = this.pos.y + this.radius;
+
+		return mouseX > xMin && mouseX < xMax && mouseY > yMin && mouseY < yMax;
+	}
 }

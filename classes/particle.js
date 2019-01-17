@@ -1,8 +1,10 @@
 class Particle extends Rocket {
-	constructor(x, y, radius, inheritedColor) {
-		super(x, y, 5);
+	constructor(x, y, radius, inheritedColor, groupId) {
+		super(x, y, radius || 5);
 		this.inheritedColor = inheritedColor;
 		this.color = null;
+
+		this.groupId = groupId || null;
 	}
 	decay() {
 		this.radius *= 0.97;
