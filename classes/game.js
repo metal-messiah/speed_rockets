@@ -179,10 +179,9 @@ class Game {
 
 		if (this.total % 10 === 0 && this.total && !this.increased) {
 			this.increaseLimit();
+			this.generateAsteroid();
 		} else {
 			// if (!this.rockets.length) setTimeout(() => this.generaterocket(), random(0, 5000));
-
-			this.generateAsteroid();
 
 			this.asteroids.forEach((asteroid) => {
 				this.mines.forEach((mine) => {
