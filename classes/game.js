@@ -30,8 +30,9 @@ class Game {
 	}
 
 	generateStars() {
+		console.log('generate stars');
 		for (let i = 0; i < 100; i++) {
-			this.stars.push(new Star(random(0, width), random(0, height), random(1, 2), random(3, 5), 5));
+			this.stars.push(new Star(random(0, windowWidth), random(0, windowHeight), random(1, 2), random(3, 5), 5));
 		}
 	}
 

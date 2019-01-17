@@ -64,4 +64,10 @@ const mouseIntersectsStart = () => {
 
 function windowResized() {
 	resizeCanvas(windowWidth, windowHeight * 0.75);
+
+	earth = new Image(windowWidth, 125);
+	earth.src = './assets/earth.png';
+
+	game.stars = [];
+	game.generateStars();
 }
