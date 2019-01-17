@@ -25,9 +25,14 @@ mousePressed = (evt) => {
 keyPressed = (evt) => {
 	const { key } = evt;
 	if (key === ' ') {
+		evt.preventDefault();
 		if (game.player.inventory.bombs) {
 			game.addBomb();
 		}
+	}
+	if (key === 'i') {
+		evt.preventDefault();
+		game.player.inventoryFollowsMouse = !game.player.inventoryFollowsMouse;
 	}
 };
 

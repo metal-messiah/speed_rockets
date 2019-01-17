@@ -69,10 +69,10 @@ const showSpecs = () => {
 	textFont(font);
 	textAlign(LEFT, CENTER);
 
-	textSize(12);
-	text('framerate: ' + fr, 25, height - 25);
+	textSize(10);
+	text(fr, 5, height - 10);
 
-	text('rockets: ' + game.rockets.length, 25, height - 50);
+	// text('rockets: ' + game.rockets.length, 25, height - 50);
 	pop();
 };
 
@@ -97,7 +97,7 @@ const showEarthStats = () => {
 };
 
 const showInventory = () => {
-	let { inventory } = game.player;
+	let { inventory, inventoryFollowsMouse } = game.player;
 
 	push();
 	stroke(0);
@@ -106,14 +106,36 @@ const showInventory = () => {
 	fill(255);
 	textFont(font);
 
-	textAlign(LEFT);
+	textAlign(inventoryFollowsMouse ? CENTER : LEFT);
 
-	textSize(20);
-	text(`Inventory`, 10, 25);
+	if (!inventoryFollowsMouse) {
+		textSize(20);
+		text(`Inventory`, 10, 25);
+	}
 
 	textSize(16);
-	text(`💣 ${inventory.bombs.toLocaleString()}`, 10, 50);
-	text(`🌌 ${inventory.mines.toLocaleString()}`, 10, 75);
+
+	let step = 0;
+	Object.keys(inventory).forEach((item, i) => {
+		const iteration = (i + 1) * 50 - step;
+		step += 25;
+
+		const x = inventoryFollowsMouse ? mouseX : 10;
+		const y = inventoryFollowsMouse ? mouseY + iteration : iteration;
+
+		let symbol;
+
+		switch (item) {
+			case 'mines':
+				symbol = `🌌`;
+				break;
+			case 'bombs':
+				symbol = `💣`;
+				break;
+		}
+
+		text(`${symbol} ${inventory[item].toLocaleString()}`, x, y);
+	});
 
 	pop();
 };
@@ -184,7 +206,7 @@ const showGameOver = () => {
 	}
 
 	push();
-	background('red');
+	background('orange');
 
 	fill(0);
 
@@ -205,7 +227,7 @@ const showGameOver = () => {
 
 	fill(color('orange'));
 	textSize(24);
-	text('Click To Try Again', width / 2, height - 50);
+	text('Try Again', width / 2, height - 50);
 	pop();
 	noLoop();
 };

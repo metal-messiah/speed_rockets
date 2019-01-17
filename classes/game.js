@@ -24,6 +24,8 @@ class Game {
 		this.player = new Player();
 
 		this.messages = [];
+
+		this.rocketCooldown = 0;
 	}
 
 	generateStars() {
@@ -105,20 +107,23 @@ class Game {
 		this.messages.push(new Message(width / 2, height / 2, message, 24));
 	}
 
-	generaterocket(mouseClicked) {
-		// console.log(this.rockets);
-		if (this.rockets.length < this.limit || mouseClicked) {
-			const x = mouseClicked ? mouseX : random(width * 0.2, width - width * 0.2);
+	generaterocket() {
+		if (this.rockets.length < this.limit && !this.rocketCooldown) {
+			const x = random(width * 0.2, width - width * 0.2);
 			const y = height;
 
 			const rocket = new Rocket(x, y, 15 / this.limit + 15);
 
 			this.rockets.push(rocket);
+
+			this.rocketCooldown = 60;
 		}
 		return;
 	}
 
 	render() {
+		this.rocketCooldown = this.rocketCooldown ? this.rocketCooldown - 1 : 0;
+
 		this.increasePopulation();
 
 		if (followRocket) {

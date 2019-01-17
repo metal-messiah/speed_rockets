@@ -21,12 +21,12 @@ let bg = 'black';
 fr = 0;
 
 preload = () => {
-	earth = new Image(600, 125);
+	earth = new Image(displayWidth, 125);
 	earth.src = './assets/earth.png';
 };
 
 setup = () => {
-	canvas = createCanvas(600, 400);
+	canvas = createCanvas(displayWidth, displayHeight * 0.75);
 	gravity = createVector(0, 0.1);
 
 	game = new Game();
@@ -37,6 +37,8 @@ setup = () => {
 
 reset = () => {
 	// console.log('RESET!');
+	delete game;
+
 	game = new Game();
 	game.generateStars();
 
@@ -76,8 +78,14 @@ const getRandomColor = () => {
 };
 
 const rocketSeeksMouse = () => {
-	const mouse = createVector(mouseX, mouseY);
-	const seek = followRocket.arrive(mouse);
+	let seek;
+	if (mouseX < width && mouseX > 0 && mouseY > 0 && mouseY < height) {
+		const mouse = createVector(mouseX, mouseY);
+		seek = followRocket.arrive(mouse);
+	} else {
+		const center = createVector(width / 2, height / 2 - 100);
+		seek = followRocket.arrive(center);
+	}
 	followRocket.applyForce(seek);
 	followRocket.update();
 	followRocket.draw();

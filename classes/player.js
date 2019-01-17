@@ -7,6 +7,8 @@ class Player {
 		this.mineScore = 0;
 		this.bombScore = 0;
 
+		this.inventoryFollowsMouse = false;
+
 		this.highscoreKey = 'rockets_highscore';
 		try {
 			this.highscore = Number(localStorage.getItem(this.highscoreKey));
