@@ -61,3 +61,7 @@ const mouseIntersectsStart = () => {
 	}
 	return false;
 };
+
+function windowResized() {
+	resizeCanvas(windowWidth, windowHeight * 0.75);
+}

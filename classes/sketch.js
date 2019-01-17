@@ -21,12 +21,12 @@ let bg = 'black';
 fr = 0;
 
 preload = () => {
-	earth = new Image(displayWidth, 125);
+	earth = new Image(windowWidth, 125);
 	earth.src = './assets/earth.png';
 };
 
 setup = () => {
-	canvas = createCanvas(displayWidth, displayHeight * 0.75);
+	generateCanvas();
 	gravity = createVector(0, 0.1);
 
 	game = new Game();
@@ -71,6 +71,10 @@ draw = () => {
 	} else {
 		showStartScreen();
 	}
+};
+
+const generateCanvas = () => {
+	canvas = createCanvas(windowWidth, windowHeight * 0.75);
 };
 
 const getRandomColor = () => {

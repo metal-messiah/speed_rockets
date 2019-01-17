@@ -3,7 +3,7 @@ class GravityMine extends Moveable {
 		super(x, y);
 		this.waves = [];
 		// this.radius = 20;
-		this.radius = displayWidth * 0.033;
+		this.radius = windowWidth * 0.033;
 
 		this.waveRadius = this.radius * 5;
 
