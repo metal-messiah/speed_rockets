@@ -116,7 +116,7 @@ class Game {
 
 			this.rockets.push(rocket);
 
-			this.rocketCooldown = 60;
+			this.rocketCooldown = 25;
 		}
 		return;
 	}
