@@ -22,9 +22,22 @@ canvas {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	position: relative;
 }
 
 ::-webkit-scrollbar {
 	width: 0px; /* remove scrollbar space */
 	background: transparent; /* optional: just make scrollbar invisible */
+}
+
+#playButton {
+	position: absolute;
+	top: 25px;
+	left: 25px;
+
+	background: orange;
+	padding: 10px;
+
+	cursor: pointer;
 }
