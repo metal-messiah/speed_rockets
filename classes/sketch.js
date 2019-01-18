@@ -33,6 +33,9 @@ setup = () => {
 	game.generateStars();
 
 	followRocket = new FollowRocket();
+
+	const helpBody = document.getElementById('help');
+	helpBody.style.display = 'flex';
 };
 
 reset = () => {

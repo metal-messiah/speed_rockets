@@ -19,7 +19,7 @@ canvas {
 	padding: 0 50px;
 	text-align: center;
 
-	display: flex;
+	display: none;
 	align-items: center;
 	justify-content: center;
 
