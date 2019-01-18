@@ -252,5 +252,13 @@ const showStartScreen = () => {
 	textSize(24);
 	text('New Game', width / 2, height - 50);
 
+	fill(color('orange'));
+	rect(25, height - 75, 50, 50);
+
+	fill(0);
+	textSize(16);
+	textAlign(CENTER, CENTER);
+	text('Help', 50, height - 50);
+
 	pop();
 };

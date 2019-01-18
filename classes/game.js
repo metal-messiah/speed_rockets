@@ -176,7 +176,7 @@ class Game {
 			star.draw();
 		});
 
-		canvas.canvas.getContext('2d').drawImage(earth, 0, -50, earth.width, earth.height);
+		canvas.canvas.getContext('2d').drawImage(earth, -25, -50, earth.width, earth.height);
 
 		if (this.total % 10 === 0 && this.total && !this.increased) {
 			this.increaseLimit();

@@ -3,7 +3,7 @@ mousePressed = (evt) => {
 
 	if (game.started) {
 		if (game.isGameOver()) {
-			if (mouseIntersectsTryAgain()) {
+			if (mouseIntersectsGui(width / 2 - 100, width / 2 + 100, height - 100, height)) {
 				reset();
 			}
 		} else {
@@ -16,7 +16,11 @@ mousePressed = (evt) => {
 			}
 		}
 	} else {
-		if (mouseIntersectsStart()) {
+		if (mouseIntersectsGui(25, 75, height - 75, height - 25)) {
+			const helpBody = document.getElementById('help');
+			helpBody.scrollIntoView({ behavior: 'smooth' });
+		}
+		if (mouseIntersectsGui(width / 2 - 100, width / 2 + 100, height - 100, height - 15)) {
 			game.started = true;
 		}
 	}
@@ -36,24 +40,11 @@ keyPressed = (evt) => {
 	}
 };
 
-const mouseIntersectsTryAgain = () => {
-	if (mouseX > width / 2 - 100) {
-		if (mouseX < width / 2 + 100) {
-			if (mouseY > height - 100) {
-				if (mouseY < height) {
-					return true;
-				}
-			}
-		}
-	}
-	return false;
-};
-
-const mouseIntersectsStart = () => {
-	if (mouseX > width / 2 - 100) {
-		if (mouseX < width / 2 + 100) {
-			if (mouseY > height - 100) {
-				if (mouseY < height - 15) {
+const mouseIntersectsGui = (xMin, xMax, yMin, yMax) => {
+	if (mouseX > xMin) {
+		if (mouseX < xMax) {
+			if (mouseY > yMin) {
+				if (mouseY < yMax) {
 					return true;
 				}
 			}
@@ -63,9 +54,9 @@ const mouseIntersectsStart = () => {
 };
 
 function windowResized() {
-	resizeCanvas(windowWidth, windowHeight * 0.75);
+	resizeCanvas(windowWidth, windowHeight);
 
-	earth = new Image(windowWidth, 125);
+	earth = new Image(windowWidth + 50, 125);
 	earth.src = './assets/earth.png';
 
 	game.stars = [];
